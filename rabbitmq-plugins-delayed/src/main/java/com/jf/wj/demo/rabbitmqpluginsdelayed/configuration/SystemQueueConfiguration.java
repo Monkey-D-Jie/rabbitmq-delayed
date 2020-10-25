@@ -36,7 +36,9 @@ public class SystemQueueConfiguration {
         Map<String, Object> args = new HashMap<>();
         args.put("x-delayed-type", "direct");
         //第二个参数是固定的  x-delayed-message
-        return new CustomExchange(MessageQueueConstants.DEFAULT_DELAYED_EXCHANGE, MessageQueueConstants.DEFAULT_DELAYED_TYPE_NAME, true, false, args);
+        CustomExchange customExchange =  new CustomExchange(MessageQueueConstants.DEFAULT_DELAYED_EXCHANGE, MessageQueueConstants.DEFAULT_DELAYED_TYPE_NAME, true, false, args);
+//        customExchange.setDelayed(true);
+        return customExchange;
     }
 
     /**
@@ -54,7 +56,7 @@ public class SystemQueueConfiguration {
      */
     @Bean
     public Binding defaultRepeatTradeBinding() {
-        return BindingBuilder.bind(defaultRepeatTradeQueue()).to(defaultDelayedExchange()).with(MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME).noargs();
+        return BindingBuilder.bind(defaultRepeatTradeQueue()).to(defaultDelayedExchange()).with(MessageQueueConstants.DEFAULT_DELAYED_ROUTING).noargs();
     }
 
 }

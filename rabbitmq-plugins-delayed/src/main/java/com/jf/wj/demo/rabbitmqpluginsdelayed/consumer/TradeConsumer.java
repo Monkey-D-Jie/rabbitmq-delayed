@@ -1,7 +1,7 @@
 package com.jf.wj.demo.rabbitmqpluginsdelayed.consumer;
 
 import com.jf.wj.demo.rabbitmqdelayed.util.JsonUtil;
-import com.jf.wj.demo.rabbitmqpluginsdelayed.MsgEnum.MessageTypeEnum;
+import com.jf.wj.demo.rabbitmqpluginsdelayed.msgEnum.MessageTypeEnum;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.common.MessageQueueConstants;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.entity.QueueMessage;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.service.MessageDelayPluginQueueService;

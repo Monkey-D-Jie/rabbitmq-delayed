@@ -1,4 +1,4 @@
-package com.jf.wj.demo.rabbitmqpluginsdelayed.MsgEnum;
+package com.jf.wj.demo.rabbitmqpluginsdelayed.msgEnum;
 
 import lombok.Getter;
 

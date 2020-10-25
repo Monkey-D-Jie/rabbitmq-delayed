@@ -24,7 +24,9 @@ public class HelloConsumer {
 
     @RabbitHandler
     public void process(String content) {
-        log.info("{}receive hello direct msg---->{}", DateUtil.convert(DateUtil.DATE_FORMAT,new Date()),content);
+        log.info("<<<<<<——————————————————————————>>>>>>");
+        log.info("{}  receive hello direct msg---->{}", DateUtil.convert(DateUtil.DATE_FORMAT,new Date()),content);
+
     }
 
 }

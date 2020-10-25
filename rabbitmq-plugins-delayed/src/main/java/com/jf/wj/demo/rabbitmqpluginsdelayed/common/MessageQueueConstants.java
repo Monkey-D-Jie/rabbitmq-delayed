@@ -20,6 +20,10 @@ public class MessageQueueConstants {
      * 默认延迟交换机
      */
     public static final String DEFAULT_DELAYED_EXCHANGE = "plugins-default.delayed.exchange";
+    /**
+     * 默认延迟交换机
+     */
+    public static final String DEFAULT_DELAYED_ROUTING= "plugins-delay.route";
 
     /**
      * 默认延迟消息类型

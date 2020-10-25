@@ -1,7 +1,7 @@
 package com.jf.wj.demo.rabbitmqpluginsdelayed.service.impl;
 
 import com.jf.wj.demo.rabbitmqdelayed.util.JsonUtil;
-import com.jf.wj.demo.rabbitmqpluginsdelayed.MsgEnum.MessageTypeEnum;
+import com.jf.wj.demo.rabbitmqpluginsdelayed.msgEnum.MessageTypeEnum;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.common.MessageQueueConstants;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.entity.QueueMessage;
 import com.jf.wj.demo.rabbitmqpluginsdelayed.exception.MessageException;
@@ -47,7 +47,15 @@ public class MessageDelayPluginQueueServiceImpl implements MessageDelayPluginQue
         rabbitTemplate.convertAndSend(exchange,queueName, msg);
     }
 
-
+    /**
+     * 延时消息的消息传递流程
+     * 发送消息--->延时封装--->设置延时对象头--->根据指定的routingkey发送到对应的交换机上
+     * --->进入到延迟类信息的特定延时队列中--->延时队列监听消息，解析出发送过来的信息后，再发送到直接型消息队列中
+     * --->监听直接消息型的消费者，消费由延时队列传过来的信息
+     *
+     *
+     * @param message
+     */
     public void sendTimeMessage(QueueMessage message) {
         int seconds = message.getSeconds();
         // 直接发送，无需进入死信队列
@@ -61,7 +69,7 @@ public class MessageDelayPluginQueueServiceImpl implements MessageDelayPluginQue
                 return s;
             };
             //设置 x-delay 之后  将消息投递到专属交换机 ， 转发队列
-            rabbitTemplate.convertAndSend(MessageQueueConstants.DEFAULT_DELAYED_EXCHANGE,MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME, JsonUtil.convertObjectJsonByFastjson(message), processor);
+            rabbitTemplate.convertAndSend(MessageQueueConstants.DEFAULT_DELAYED_EXCHANGE,MessageQueueConstants.DEFAULT_DELAYED_ROUTING, JsonUtil.convertObjectJsonByFastjson(message), processor);
         }
     }
 
